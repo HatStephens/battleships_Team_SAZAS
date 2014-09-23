@@ -17,17 +17,17 @@ describe Grid do
 	# end
 
 	it 'should be able to place a ship on the grid horizontally' do
-		grid.place_ship_horizontally(ship, 4, 6)
-		expect(grid.grid[3][5]).to eq('S')
-		expect(grid.grid[3][6]).to eq('S')
-		expect(grid.grid[3][7]).to eq('S')
+		grid.place_ship_horizontally(ship, 2, 2)
+		expect(grid.grid[2][2]).to eq('S')
+		expect(grid.grid[2][3]).to eq('S')
+		expect(grid.grid[2][4]).to eq('S')
 	end
 
 	it 'should be able to place a ship on the grid vertically' do
 		grid.place_ship_vertically(ship, 4, 6)
-		expect(grid.grid[3][5]).to eq('S')
-		expect(grid.grid[4][5]).to eq('S')
-		expect(grid.grid[5][5]).to eq('S')
+		expect(grid.grid[4][6]).to eq('S')
+		expect(grid.grid[5][6]).to eq('S')
+		expect(grid.grid[6][6]).to eq('S')
 	end
 
 	it 'should not be able to place a ship horizontally if too long' do
@@ -40,12 +40,12 @@ describe Grid do
 
 	it 'should not be able to place a ship horizontally if there is something there' do
 		grid.place_ship_horizontally(ship, 3, 5)
-		expect{grid.place_ship_horizontally(ship, 3, 4)}.to raise_error("Cannot place here because there is a ship in the way.")
+		expect{grid.place_ship_horizontally(ship, 3, 3)}.to raise_error("Cannot place here because there is a ship in the way.")
 	end
 
 	it 'should not be able to place a ship vertically if there is something there' do
-		grid.place_ship_vertically(ship, 3, 5)
-		expect{grid.place_ship_vertically(ship, 4, 5)}.to raise_error("Cannot place here because there is a ship in the way.")
+		grid.place_ship_vertically(ship, 4, 5)
+		expect{grid.place_ship_vertically(ship, 6, 5)}.to raise_error("Cannot place here because there is a ship in the way.")
 	end
 
 	it 'should be able to take a new value for the size of the grid' do
@@ -58,19 +58,24 @@ describe Grid do
 	end
 
 	it "should change if it receives a missile" do
-		expect{grid.received_missile(2,3)}.to change{grid.grid[1][2]}
+		expect{grid.received_missile(2,3)}.to change{grid.grid[2][3]}
 	end
 
 	it "should change to a * if a ship is hit" do
 		grid.place_ship_horizontally(ship, 2, 3)
-		expect{grid.received_missile(2,3)}.to change{grid.grid[1][2]}.to eq('*')
+		expect{grid.received_missile(2,3)}.to change{grid.grid[2][3]}.to eq('*')
 	end
 
 	it "should change to an o if it hits nothing" do
-		expect{grid.received_missile(2,3)}.to change{grid.grid[1][2]}.to eq('o')
+		expect{grid.received_missile(2,3)}.to change{grid.grid[2][3]}.to eq('o')
 	end
 
 	it "should know if a cell is empty" do
 		expect(grid.empty?(2,3)).to eq(true)
+	end
+
+	it 'should raise an error if missile is fired a previously selected square' do
+		grid.received_missile(2,3)
+		expect{grid.received_missile(2,3)}.to raise_error("You have already been here.")
 	end
 end
