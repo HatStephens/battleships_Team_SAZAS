@@ -3,10 +3,12 @@ class Grid
 	attr_reader :grid, :grid_size
 
 	DEFAULT_GRID_SIZE = 10
+	DEFAULT_EMPTY = '~'
+	DEFAULT_FIRE = '*'
 
 	def initialize(option={})
 		@grid_size = option.fetch(:grid_size, DEFAULT_GRID_SIZE)
-		@grid = Array.new(@grid_size) {Array.new(@grid_size, '~')}
+		@grid = Array.new(@grid_size) {Array.new(@grid_size, DEFAULT_EMPTY)}
 		@received_ships = []
 
 	end
@@ -24,18 +26,25 @@ class Grid
 	# end
 
 	def place_ship_horizontally(ship, start_row, start_col)
-		raise "Cannot place here because there is not enough space." if ship.size > 10-(start_col-1)
-		((start_col-1)..((start_col-1) + (ship.size-1))).each {|n| raise "Cannot place here because there is a ship in the way." if grid[start_row-1][n]!='~'}
+		raise "Cannot place here because there is not enough space." if ship.size > (@grid_size-(start_col-1))
+		((start_col-1)..((start_col-1) + (ship.size-1))).each {|n| raise "Cannot place here because there is a ship in the way." unless empty?(start_row, n+1)}
 		(0..(ship.size-1)).each {|n| @grid[start_row-1][start_col+(-1+n)] = ship.body[n]}
 	end
 
 	def place_ship_vertically(ship, start_row, start_col)
-		raise "Cannot place here because there is not enough space." if ship.size > 10-(start_row-1)
-		((start_row-1)..((start_row-1) + (ship.size-1))).each {|n| raise "Cannot place here because there is a ship in the way." if grid[n][start_col-1]!='~'}
+		raise "Cannot place here because there is not enough space." if ship.size > (@grid_size-(start_row-1))
+		((start_row-1)..((start_row-1) + (ship.size-1))).each {|n| raise "Cannot place here because there is a ship in the way." unless empty?(n+1, start_col)}
 		(0..ship.size-1).each {|n| @grid[start_row+(-1+n)][start_col-1] = ship.body[n]}
 	end
 
 	# WE WILL REFACTOR THESE LAST TWO METHODS. I PROMISE.
+	def received_missile(row, column)
+		return @grid[row-1][column-1] = 'o' if empty?(row, column) 
+		@grid[row-1][column-1] = DEFAULT_FIRE
+	end
 
+	def empty?(row, column)
+		@grid[row-1][column-1] == DEFAULT_EMPTY
+	end
 
 end

@@ -57,4 +57,20 @@ describe Grid do
 		expect(grid.grid_size).to eq(10)
 	end
 
+	it "should change if it receives a missile" do
+		expect{grid.received_missile(2,3)}.to change{grid.grid[1][2]}
+	end
+
+	it "should change to a * if a ship is hit" do
+		grid.place_ship_horizontally(ship, 2, 3)
+		expect{grid.received_missile(2,3)}.to change{grid.grid[1][2]}.to eq('*')
+	end
+
+	it "should change to an o if it hits nothing" do
+		expect{grid.received_missile(2,3)}.to change{grid.grid[1][2]}.to eq('o')
+	end
+
+	it "should know if a cell is empty" do
+		expect(grid.empty?(2,3)).to eq(true)
+	end
 end

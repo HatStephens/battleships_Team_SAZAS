@@ -11,6 +11,10 @@ class Ship
 		@size.times{@body << @name[0].upcase}
 	end
 
+	def rubber_ring
+		new(:rubber_ring, 1)
+	end
+
 	def self.destroyer
 		new(:destroyer, 2)
 	end
@@ -23,7 +27,8 @@ class Ship
 		new(:battleship, 4)
 	end
 
-	def self.aircraft
-		new(:aircraft, 5)
+	def self.carrier
+		new(:carrier, 5)
 	end
+
 end
