@@ -1,20 +1,27 @@
+require_relative 'table_to_screen'
+
 class Grid
+	include ScreenTable
+	Grid::ScreenTable
 
 	attr_reader :grid, :grid_size
 
-	DEFAULT_GRID_SIZE = 10
+	DEFAULT_GRID_SIZE = 11
 	DEFAULT_EMPTY = '~'
 	DEFAULT_FIRE = '*'
 
 	def initialize(option={})
 		@grid_size = option.fetch(:grid_size, DEFAULT_GRID_SIZE)
-		@grid = Array.new(@grid_size) {Array.new(@grid_size, DEFAULT_EMPTY)}
+		@grid = Array.new(@grid_size) {Array.new(@grid_size-1, DEFAULT_EMPTY)}
 		@received_ships = []
+		@grid[0] = %w[1 2 3 4 5 6 7 8 9 10]
+		(0..10).each {|row_number| @grid[row_number].insert(0, row_number)}
 
 	end
 
 	def print_grid
-		(0..(@grid_size-1)).each { |n| puts @grid[n].join(' ')}
+		# (0..(@grid_size-1)).each { |n| puts @grid[n].join(' ')}
+		table_to_screen(self)
 	end
 
 	def received_ships
@@ -48,3 +55,6 @@ class Grid
 	end
 
 end
+
+grid = Grid.new
+grid.print_grid
