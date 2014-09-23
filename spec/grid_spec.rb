@@ -52,4 +52,8 @@ describe Grid do
 		bigger_grid = Grid.new(grid_size: 20)
 		expect(bigger_grid.grid[19][19]).to eq ('~')
 	end	
+
+	it 'should know its grid size' do
+		expect(grid.grid_size).to eq(10)
+	end
 end

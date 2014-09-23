@@ -1,16 +1,18 @@
 class Grid
 
-	attr_reader :grid
+	attr_reader :grid, :grid_size
 
 	DEFAULT_GRID_SIZE = 10
 
 	def initialize(option={})
-		@grid = Array.new(option.fetch(:grid_size, DEFAULT_GRID_SIZE)) {Array.new(option.fetch(:grid_size, DEFAULT_GRID_SIZE), '~')}
+		@grid_size = option.fetch(:grid_size, DEFAULT_GRID_SIZE)
+		@grid = Array.new(@grid_size) {Array.new(@grid_size, '~')}
 		@received_ships = []
+
 	end
 
 	def print_grid
-		(0..9).each { |n| puts @grid[n].join(' ')}
+		(0..(@grid_size-1)).each { |n| puts @grid[n].join(' ')}
 	end
 
 	def received_ships
