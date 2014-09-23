@@ -2,8 +2,10 @@ class Grid
 
 	attr_reader :grid
 
-	def initialize
-		@grid = Array.new(10) {Array.new(10, '+')}
+	DEFAULT_GRID_SIZE = 10
+
+	def initialize(option={})
+		@grid = Array.new(option.fetch(:grid_size, DEFAULT_GRID_SIZE)) {Array.new(option.fetch(:grid_size, DEFAULT_GRID_SIZE), '~')}
 		@received_ships = []
 	end
 
@@ -20,7 +22,15 @@ class Grid
 	# end
 
 	def place_ship_horizontally(ship, start_row, start_col)
-		(0..ship.size).each {|n| @grid[start_row-1][start_col+(-1+n)] = ship.body[n]}
+		raise "Cannot place here because there is not enough space." if ship.size > 10-(start_col-1)
+		((start_col-1)..((start_col-1) + (ship.size-1))).each {|n| raise "Cannot place here because there is a ship in the way." if grid[start_row-1][n]!='~'}
+		(0..(ship.size-1)).each {|n| @grid[start_row-1][start_col+(-1+n)] = ship.body[n]}
+	end
+
+	def place_ship_vertically(ship, start_row, start_col)
+		raise "Cannot place here because there is not enough space." if ship.size > 10-(start_row-1)
+		((start_row-1)..((start_row-1) + (ship.size-1))).each {|n| raise "Cannot place here because there is a ship in the way." if grid[n][start_col-1]!='~'}
+		(0..ship.size-1).each {|n| @grid[start_row+(-1+n)][start_col-1] = ship.body[n]}
 	end
 
 
