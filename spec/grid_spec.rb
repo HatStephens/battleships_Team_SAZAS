@@ -56,4 +56,5 @@ describe Grid do
 	it 'should know its grid size' do
 		expect(grid.grid_size).to eq(10)
 	end
+
 end

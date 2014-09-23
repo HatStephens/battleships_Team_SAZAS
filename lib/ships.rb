@@ -12,7 +12,7 @@ class Ship
 	end
 
 	def self.destroyer
-		new(:destryer, 2)
+		new(:destroyer, 2)
 	end
 
 	def self.submarine
@@ -24,6 +24,6 @@ class Ship
 	end
 
 	def self.aircraft
-		new(:aicraft, 5)
+		new(:aircraft, 5)
 	end
 end

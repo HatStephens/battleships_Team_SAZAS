@@ -35,5 +35,7 @@ class Grid
 		(0..ship.size-1).each {|n| @grid[start_row+(-1+n)][start_col-1] = ship.body[n]}
 	end
 
+	# WE WILL REFACTOR THESE LAST TWO METHODS. I PROMISE.
+
 
 end
