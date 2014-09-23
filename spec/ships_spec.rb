@@ -14,5 +14,15 @@ describe Ship do
 		expect(ship.name).to be(:submarine)
 	end
 
+	it "should create an array " do
+		expect(ship.body.class).to be(Array)
+	end
 
+	it "should have an array of size = length" do
+		expect(ship.body.count).to eq(3)
+	end
+
+	it "should put first letter of name in array" do
+		expect(ship.body[0]).to eq("S")
+	end
 end
