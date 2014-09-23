@@ -11,7 +11,7 @@ class Ship
 		@size.times{@body << @name[0].upcase}
 	end
 
-	def rubber_ring
+	def self.rubber_ring
 		new(:rubber_ring, 1)
 	end
 
