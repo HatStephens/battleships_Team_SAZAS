@@ -1,7 +1,7 @@
 class Ship
 
 	attr_reader :size, :name, :body
-	attr_accessor :direction
+	attr_accessor :direction, :start_row, :start_col
 	
 	def initialize(name, length)
 		@size = length
@@ -9,6 +9,8 @@ class Ship
 		@body =[]
 		@size.times{@body << @name[0].upcase}
 		@direction = ""
+		@start_row = 0
+		@start_col = 0
 	end
 
 	def self.rubber_ring
