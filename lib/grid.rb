@@ -25,17 +25,19 @@ class Grid
 		raise "Cannot place here because there is not enough space." if ship.size > (@grid_size-(start_col-1))
 		((start_col)..((start_col) + (ship.size-1))).each {|n| raise "Cannot place here because there is a ship in the way." unless empty?(start_row, n)}
 		(0..(ship.size-1)).each {|n| @grid[start_row][start_col+n] = ship.body[n]}
+		print_grid
 	end
 
 	def place_ship_vertically(ship, start_row, start_col)
 		raise "Cannot place here because there is not enough space." if ship.size > (@grid_size-(start_row-1))
 		((start_row)..((start_row) + (ship.size-1))).each {|n| raise "Cannot place here because there is a ship in the way." unless empty?(n, start_col)}
 		(0..ship.size-1).each {|n| @grid[start_row+n][start_col] = ship.body[n]}
+		print_grid
 	end
 
 	# WE WILL REFACTOR THESE LAST TWO METHODS. I PROMISE.
 	def received_missile(row, column)
-		raise "You have already been here." if been?(row, column)
+		raise "You have already been here." if been_here?(row, column)
 		return miss(row, column) if empty?(row, column) 
 		hit(row,column) 
 	end
@@ -54,8 +56,8 @@ class Grid
 		@grid[row][column] == DEFAULT_EMPTY
 	end
 
-	def been?(row, column)
-		@grid[row][column] == 'o' #|| @grid[row][column] == '*'
+	def been_here?(row, column)
+		@grid[row][column] == 'o' || @grid[row][column] == '*'
 	end
 
 end
