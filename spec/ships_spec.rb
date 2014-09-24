@@ -25,4 +25,9 @@ describe Ship do
 	it "should put first letter of name in array" do
 		expect(ship.body[0]).to eq("S")
 	end
+
+	it 'should have a direction' do
+		expect(ship.direction.class).to be(String)
+	end	
+
 end
