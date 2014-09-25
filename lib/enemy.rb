@@ -39,4 +39,14 @@ class Enemy
 		end
 	end
 
+	def enemy_shoot(player)
+		begin
+			player.player_grid.received_shot(rand(9)+1, rand(9)+1)
+		rescue
+			enemy_shoot(player)
+		end
+	end
+
+
+
 end

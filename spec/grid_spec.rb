@@ -58,16 +58,16 @@ describe Grid do
 	end
 
 	it "should change if it receives a missile" do
-		expect{grid.received_missile(2,3)}.to change{grid.grid[2][3]}
+		expect{grid.received_shot(2,3)}.to change{grid.grid[2][3]}
 	end
 
 	it "should change to a * if a ship is hit" do
 		grid.place_ship_horizontally(ship, 2, 3)
-		expect{grid.received_missile(2,3)}.to change{grid.grid[2][3]}.to eq('*')
+		expect{grid.received_shot(2,3)}.to change{grid.grid[2][3]}.to eq('*')
 	end
 
 	it "should change to an o if it hits nothing" do
-		expect{grid.received_missile(2,3)}.to change{grid.grid[2][3]}.to eq('o')
+		expect{grid.received_shot(2,3)}.to change{grid.grid[2][3]}.to eq('o')
 	end
 
 	it "should know if a cell is empty" do
@@ -75,12 +75,12 @@ describe Grid do
 	end
 
 	it 'should raise an error if missile is fired a previously selected square' do
-		grid.received_missile(2,3)
-		expect{grid.received_missile(2,3)}.to raise_error("You have already been here.")
+		grid.received_shot(2,3)
+		expect{grid.received_shot(2,3)}.to raise_error("You have already been here.")
 	end
 
 	it 'should know how many squares are taken up by ships' do
 		grid.place_ship_horizontally(ship, 2, 3)
-		expect(grid.ship_square_count).to eq(3)
+		expect(grid.ship_square_count('~')).to eq(97)
 	end
 end
