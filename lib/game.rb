@@ -1,9 +1,11 @@
 require_relative 'ships'
 require_relative 'input_manager'
+require_relative 'player'
+
 
 class Game
 
-	attr_reader :ships, :input_manager
+	attr_reader :ships, :input_manager, :player
 
 	def initialize
 		@ships = []
@@ -11,28 +13,18 @@ class Game
 	end
 
 	def start_message
-		@input_manager.start_message
+		@input_manager.greeter
 	end
 
-	# def ask_name
-	# 	puts "Please enter your name:"
-	# end 
+	def create_player
+		name = input_manager.get_name
+		@player = Player.new(name)
+    end
 
-	def get_name
-		@name = input_manager.get_name
-		create_players(@name)
+	def create_oponents
+        create_player
+        @enemy = Enemy.new
 	end
-
-	#***************START*******************
-	def create_players(name)
-		#creates player user and gives it name
-		#sets player.is_a_user to true
-		#creates player enemy and calls it :enemy
-		#sets player.is_a_user to false
-		#(game needs 2 attr_accessor player and enemy 
-	end
-
-	#*****************END*******************
 
 	def get_ships
 		@ships << [Ship.rubber_ring, Ship.destroyer, Ship.submarine, Ship.battleship, Ship.carrier]
@@ -50,36 +42,7 @@ class Game
 	end
 	#******************END******************
 	
-	def ask_direction(ship_name)
-		puts "Please enter the direction to place your #{ship_name} (H or V):"
-	end
 
-	def get_direction(ship)
-		@direction = gets.chomp.downcase
-		until  @direction == "h" || @direction == "v" do
-			ask_direction(ship.name)
-			@direction = gets.chomp.downcase
-		end
-		ship.direction = @direction
-	end
-
-	def ask_row(ship_name)
-		puts "Please enter the row to place your #{ship_name}:"
-	end
-
-	def get_row(ship)
-		@row = gets.chomp.to_i
-		ship.start_row = @row
-	end
-
-	def ask_col(ship_name)
-		puts "Please enter the column to place your #{ship_name}:"
-	end
-
-	def get_col(ship)
-		@col = gets.chomp.to_i
-		ship.start_col = @col
-	end
 
 	def place_on_grid(ship) 
 		return grid.place_ship_horizontally ship.direction == "h"
