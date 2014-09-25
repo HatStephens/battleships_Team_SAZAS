@@ -1,17 +1,11 @@
 **BATTLESHIPS**
-= 
+
 **TEAM: SAZAS**
-=
 
 Makers Academy Week 2 Project: Battleship Command Line Game
 
 **Team Members**
 
-<<<<<<< HEAD
-Hi, my name is Sean!
-
-Grettings from Ana
-=======
 Sean Smith
 Ana Nogal
 Zeeshan Rasool
@@ -25,19 +19,18 @@ Battleships is a command line version of the popular real-world game with the sa
 
 **Model**
 
-The objects in our code are: Ship, Grid, Interface, Display, Enemy
+The classes in our game are: Ships, Grid, Game, Input Manager, Player, Enemy, and Table to Screen.
 
-Ship: The ship is a class that creates five different types of ships and assigns them lengths and names.
+Ship: The ship class creates five different type of ships each with a different name, length, direction.
 
-Grid: This is the central object with which every other object interacts. It displays coordinates and populates them with ships. It also registers hits and misses.
+Grid: This is the central object on which the game takes place. The grid class defines the dimensions (10x10 by default) of the grid, places the ship (either horizontally or vertically) for the human player and computer player. It also registers hits and misses by the two players. 
 
-Game: This stores the logic of the game. It takes inputs from the user, displays the grid, and displays changes occurring to the grid. Prints game messages e.g. "You've Hit." "You've Missed." "Please Enter Your Name."
+Game: This class initializes the components of the games. It presents the player with a start message, creates player, creates opponent, gets their ships and places them on the grid. It also randomises the hits by the opponent player. It manages the turns and keeps track of scores by both the players.
 
-Enemy: This class is the AI of the game. It'll consist of the moves that the computer can make against the human player.
+Enemy: This class defines the computer opponent, initialising it with a score of zero, creates ships on behalf of the computer, places the ship on the enemy grid. The placement of the ship occurs at random and will be different for all new instances of the game. 
 
+Input Manager: The input manager classes defines what messages will be displayed to the user and what inputs will be required from the user. The user will be asked to give a name, and direction and coordinate for the ships.
 
-WE STOPPED SKETCHING AND JUST STARTED CODING. SORRY!
-=
+Player: The player classes initialises the human player profile, asking for a name, with an initial score of zero, and creates a new grid for the human player.
 
-> Written with [StackEdit](https://stackedit.io/).
->>>>>>> 58578f8567716241024e51c013c41056ee36e0f0
+Table to Screen: This class works off of a gem called Terminal-Table and prints the grid to the user in the command line interface.
