@@ -1,24 +1,24 @@
 **BATTLESHIPS**
-
+==
 **TEAM: SAZAS**
-
+==
 Makers Academy Week 2 Project: Battleship Command Line Game
 
 **Team Members**
-
-Sean Smith
-Ana Nogal
-Zeeshan Rasool
-Anna Jerofejeva
-Stephen Giles
+==
+- Sean Smith
+- Ana Nogal
+- Zeeshan Rasool
+- Anna Jerofejeva
+- Stephen Giles
 
 
 **Description**
-
+==
 Battleships is a command line version of the popular real-world game with the same name. It is written entirely in Ruby.
 
 **Model**
-
+==
 The classes in our game are: Ships, Grid, Game, Input Manager, Player, Enemy, and Table to Screen.
 
 Ship: The ship class creates five different type of ships each with a different name, length, direction.
