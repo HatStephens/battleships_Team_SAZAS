@@ -43,14 +43,23 @@ class Player
 				ship.start_row = @input.get_row
 				@input.ask_col(ship.name)
 				ship.start_col = @input.get_col
-				can_place_ship = place_on_grid(ship)
+				@can_place_ship = place_on_grid(ship)
 			end
 		player_grid.print_grid 
 		end
 	end
 
-	def place_on_grid(ship) 
-		return @player_grid.place_ship_horizontally(ship) if ship.direction == "h"
-		return @player_grid.place_ship_vertically(ship) if ship.direction == "v"
+	def place_on_grid(ship)
+		
+		begin
+
+			return @player_grid.place_ship_horizontally(ship) if ship.direction == "h"
+			return @player_grid.place_ship_vertically(ship) if ship.direction == "v"
+		
+		rescue
+			
+			return false
+		end
+			
 	end
 end

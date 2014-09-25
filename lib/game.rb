@@ -6,21 +6,21 @@ require_relative 'enemy'
 
 class Game
 
-	attr_reader :ships, :input_manager, :player, :enemy
+	attr_reader :ships, :input, :player, :enemy
 
 	def initialize
 		@ships = []
-		@input_manager = InputManager.new
+		@input = InputManager.new
 		start_message
 		create_oponents
 	end
 
 	def start_message
-		@input_manager.greeter
+		@input.greeter
 	end
 
 	def create_player
-		name = input_manager.get_name
+		name = input.get_name
 		@player = Player.new(name)
     end
 
@@ -31,13 +31,13 @@ class Game
 	
 	def shot
 		row  = input.get_shot_row
-		get_col = input.get_shot_col
+		col = input.get_shot_col
 		results_of_a_shot(row, col)
 	end
 
     def shot_randomlly
 		row  = random
-		get_col = random
+		col = random
 		results_of_a_shot(row, col)
 	end
 

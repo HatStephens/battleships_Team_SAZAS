@@ -23,17 +23,18 @@ class Grid
 	end
 
 	def place_ship_horizontally(ship)
+		
 		raise "Cannot place here because there is not enough space." if ship.size > (@grid_size-(ship.start_col-1))
 		((ship.start_col)..((ship.start_col) + (ship.size-1))).each {|n| raise "Cannot place here because there is a ship in the way." unless empty?(ship.start_row, n)}
 		(0..(ship.size-1)).each {|n| @grid[ship.start_row][ship.start_col+n] = ship.body[n]}
-		# print_grid
+		
 	end
 
 	def place_ship_vertically(ship)
+		
 		raise "Cannot place here because there is not enough space." if ship.size > (@grid_size-(ship.start_row-1))
 		((ship.start_row)..((ship.start_row) + (ship.size-1))).each {|n| raise "Cannot place here because there is a ship in the way." unless empty?(n, ship.start_col)}
 		(0..ship.size-1).each {|n| @grid[ship.start_row+n][ship.start_col] = ship.body[n]}
-		# print_grid
 	end
 
 	# WE WILL REFACTOR THESE LAST TWO METHODS. I PROMISE.
