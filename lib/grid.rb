@@ -15,7 +15,7 @@ class Grid
 		@grid[0] = %w[1 2 3 4 5 6 7 8 9 10]
 		@grid[0].insert(0, "")
 		(1..10).each {|row_number| @grid[row_number].insert(0, row_number)}
-		@count = 0
+		@count = (DEFAULT_GRID_SIZE)*(DEFAULT_GRID_SIZE)
 	end
 
 	def print_grid
@@ -37,7 +37,7 @@ class Grid
 	end
 
 	# WE WILL REFACTOR THESE LAST TWO METHODS. I PROMISE.
-	def received_missile(row, column)
+	def received_shot(row, column)
 		raise "You have already been here." if been_here?(row, column)
 		return miss(row, column) if empty?(row, column) 
 		hit(row,column) 
@@ -61,10 +61,10 @@ class Grid
 		@grid[row][column] == 'o' || @grid[row][column] == '*'
 	end
 
-	def ship_square_count
+	def ship_square_count(symbol)
 		(1..10).each do |row|
 			(1..10).each do |column|
-				@count += 1 if @grid[row][column] != '~'
+				@count -= 1 if @grid[row][column] != symbol
 			end
 		end
 		@count
