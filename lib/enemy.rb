@@ -45,6 +45,7 @@ class Enemy
 		rescue
 			enemy_shoot(player)
 		end
+		player.player_grid.print_grid
 	end
 
 
