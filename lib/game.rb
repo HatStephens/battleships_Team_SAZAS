@@ -139,26 +139,21 @@ class Game
 
 	def play_enemy
 		shot_randomlly
-		update_current_player
+		update_score
 		update_user_output
 	end
 
 	def play_user
 		shot
-		update_current_player
+		update_score
 		update_user_output
 	end
 
-	def update_current_player
-		#updates current_player score
-		#verifies if current_player is a winner
-	end
-
-	def playing_turn(player)
-		if(player.is_a_user?)
+	def turns
+		while player.score < 30 || enemy.score < 30 do
 			play_user
-		else
 			play_enemy
 		end
+		#call input_manager to say winner message
 	end
 end

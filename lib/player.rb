@@ -6,4 +6,9 @@ attr_reader :name, :score
 		@name = name
 		@score = 0
 	end
+
+	#player_grid
+	#create grid
+	#update_score
+	
 end
