@@ -23,24 +23,15 @@ describe Game do
 		expect(game.player.class).to eq(Player)	
 	end
 
-	it "should assign the name to the player" do
-		expect(input.get_name).to eq("ana")
-		game.create_player
-		expect(game.player.name).to eq("ana")
+	it "should create oponets" do
+		game.create_oponents
+		expect(game.enemy.class).to eq(Enemy)	
 	end
-
-	#it "should create oponets" do
-	#	game.create_oponents
-	#	expect(game.player).to_not eq(nil)
-	#end
 
 
 	it 'should create an array with each ship in it' do
 		expect{game.get_ships}.to change{game.ships.count}.by(5)
 	end
-
-
-
 
 	#it 'should loop ships and get their initial positions' do
 	#	game.get_ships

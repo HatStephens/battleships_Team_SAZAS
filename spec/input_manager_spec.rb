@@ -24,5 +24,15 @@ describe InputManager do
     it 'should ask the row to place their ship' do
 		expect{input.ask_row(ship.name)}.to output("Please enter the row to place your submarine:\n").to_stdout
 	end
+
+	it 'should ask for shooting row' do
+		expect{input.ask_shot_row}.to output("Please enter a row to shoot\n").to_stdout
+	end
+
+	it 'should ask for shooting column' do
+		expect{input.ask_shot_col}.to output("Please enter a column to shoot\n").to_stdout
+	end
+
+
   
 end

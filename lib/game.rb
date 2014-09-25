@@ -1,11 +1,12 @@
 require_relative 'ships'
 require_relative 'input_manager'
 require_relative 'player'
+require_relative 'enemy'
 
 
 class Game
 
-	attr_reader :ships, :input_manager, :player
+	attr_reader :ships, :input_manager, :player, :enemy
 
 	def initialize
 		@ships = []
@@ -31,57 +32,38 @@ class Game
 		@ships.flatten!
 	end
 
-	#*******************START******************
-
-	def create_grid
-		#creates the grid for placing boats of the player ships_grid
-		#creates the grid for placing players shots
-		#the grid should have some king of identification of 
-		#what kind of grid it is
-		#should be call twice
+	def initialize_players_grid(grid)
+		grid.print_grid
+		get_ships_locations
 	end
-	#******************END******************
 	
-
-
-	def place_on_grid(ship) 
-		return grid.place_ship_horizontally ship.direction == "h"
-		return grid.place_ship_vertically ship.direction == "v"
+	def place_on_grid(ship, grid) 
+		return grid.place_ship_horizontally if ship.direction == "h"
+		return grid.place_ship_vertically if ship.direction == "v"
 	end
 
 	def get_ships_locations
 		ships.each do |ship|
 			@can_place_ship = false
 			while @can_place_ship == false do
-				ask_direction(ship.name)
-				get_direction(ship)
-				ask_row(ship.name)
-				get_row(ship)
-				ask_col(ship.name)
-				get_col(ship)
+				input.ask_direction(ship.name)
+				ship.direction = input.get_direction
+				input.ask_row(ship.name)
+				ship.start_row = input.get_row
+				input.ask_col(ship.name)
+				ship.start_col = input.get_col
 				can_place_ship = place_on_grid(ship)
 			end
 		end
 	end
 
-	def get_turn
-		#decides wish player plays this turn 
-		#puts the player in turn in current_player
-	end
-
-	def get_shot_row
-		#asks user for row to shot
-	end
-
-	def get_shot_col
-		#askes user for col to shot
-	end
-
 	def shot
-		row  = get_shot_row
-		get_col = get_shot_col
+		row  = input.get_shot_row
+		get_col = input.get_shot_col
 		results_of_a_shot(row, col)
 	end
+
+
 
 	def shot_randomlly
 		row  = random
