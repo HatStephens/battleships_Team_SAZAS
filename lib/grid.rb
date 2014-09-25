@@ -15,6 +15,7 @@ class Grid
 		@grid[0] = %w[1 2 3 4 5 6 7 8 9 10]
 		@grid[0].insert(0, "")
 		(1..10).each {|row_number| @grid[row_number].insert(0, row_number)}
+		@count = 0
 	end
 
 	def print_grid
@@ -58,6 +59,15 @@ class Grid
 
 	def been_here?(row, column)
 		@grid[row][column] == 'o' || @grid[row][column] == '*'
+	end
+
+	def ship_square_count
+		(1..10).each do |row|
+			(1..10).each do |column|
+				@count += 1 if @grid[row][column] != '~'
+			end
+		end
+		@count
 	end
 
 end

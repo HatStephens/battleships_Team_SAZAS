@@ -78,4 +78,9 @@ describe Grid do
 		grid.received_missile(2,3)
 		expect{grid.received_missile(2,3)}.to raise_error("You have already been here.")
 	end
+
+	it 'should know how many squares are taken up by ships' do
+		grid.place_ship_horizontally(ship, 2, 3)
+		expect(grid.ship_square_count).to eq(3)
+	end
 end
