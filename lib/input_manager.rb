@@ -34,18 +34,20 @@ class InputManager
 	end
 
 	def get_row
-		return gets.chomp.to_i
+		@row = gets.chomp.to_i 
+		return @row if(@row < 11 && @row > 0)
+		get_row
 	end
 
 	def ask_col(ship_name)
 		puts "Please enter the column to place your #{ship_name}:"
 	end
 
-	#def get_col
-		#@col = gets.chomp.to_i
-		#return @col if (@col < 11 %% @col > 0)
-		#get_col
-	#end
+	def get_col
+		@col = gets.chomp.to_i
+		return @col if (@col < 11 && @col > 0)
+		get_col
+	end
 
 	def get_shot_row
 		ask_shot_row

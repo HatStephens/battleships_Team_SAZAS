@@ -7,11 +7,11 @@ class Enemy
 	attr_reader :actual_grid, :displayed_grid, :ships
 
 	def initialize
-		@score = 0
-		@actual_grid = Grid.new
-		@displayed_grid = Grid.new
-		@count = 0
+		@score, @count = 0, 0
+		@actual_grid, @displayed_grid = Grid.new, Grid.new
 		@ships = []
+		get_ships
+		enemy_place_ships
 	end
 
 	def get_ships
@@ -21,7 +21,6 @@ class Enemy
 
 	def enemy_place_ships
 		@ships.each { |ship| random_placement(ship) }			
-		@actual_grid.print_grid
 	end
 
 	def random_placement(ship)
@@ -30,9 +29,9 @@ class Enemy
 		ship.start_col = rand(9)+1
 		begin
 			if ship.direction == 'h'
-				@actual_grid.place_ship_horizontally(ship, ship.start_row, ship.start_col)
+				@actual_grid.place_ship_horizontally(ship)
 			else
-				@actual_grid.place_ship_vertically(ship, ship.start_row, ship.start_col)
+				@actual_grid.place_ship_vertically(ship)
 			end
 		rescue
 			random_placement(ship)
@@ -47,7 +46,4 @@ class Enemy
 		end
 		player.player_grid.print_grid
 	end
-
-
-
 end

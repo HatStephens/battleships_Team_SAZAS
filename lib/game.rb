@@ -11,6 +11,8 @@ class Game
 	def initialize
 		@ships = []
 		@input_manager = InputManager.new
+		start_message
+		create_oponents
 	end
 
 	def start_message
@@ -23,49 +25,17 @@ class Game
     end
 
 	def create_oponents
-        create_player
         @enemy = Enemy.new
-	end
-
-	def get_ships
-		@ships << [Ship.rubber_ring, Ship.destroyer, Ship.submarine, Ship.battleship, Ship.carrier]
-		@ships.flatten!
-	end
-
-	def initialize_players_grid(grid)
-		grid.print_grid
-		get_ships_locations
+        create_player
 	end
 	
-	def place_on_grid(ship, grid) 
-		return grid.place_ship_horizontally if ship.direction == "h"
-		return grid.place_ship_vertically if ship.direction == "v"
-	end
-
-	def get_ships_locations
-		ships.each do |ship|
-			@can_place_ship = false
-			while @can_place_ship == false do
-				input.ask_direction(ship.name)
-				ship.direction = input.get_direction
-				input.ask_row(ship.name)
-				ship.start_row = input.get_row
-				input.ask_col(ship.name)
-				ship.start_col = input.get_col
-				can_place_ship = place_on_grid(ship)
-			end
-		end
-	end
-
 	def shot
 		row  = input.get_shot_row
 		get_col = input.get_shot_col
 		results_of_a_shot(row, col)
 	end
 
-
-
-	def shot_randomlly
+    def shot_randomlly
 		row  = random
 		get_col = random
 		results_of_a_shot(row, col)
