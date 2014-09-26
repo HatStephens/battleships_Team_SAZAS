@@ -46,8 +46,14 @@ class Grid
 	end
 
 	def miss(row, column)
+<<<<<<< HEAD
 		@grid[row][column] = DEFAULT_MISS
 		DEFAULT_MISS
+=======
+		@grid[row][column] = 'o'
+		@grid_displayed[row][col] = 'o'
+		# print_grid
+>>>>>>> 8acca6a1061757cc1f9076ca7a5d796525721d26
 	end
 
 	def hit(row,column)

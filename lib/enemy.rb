@@ -8,7 +8,7 @@ class Enemy
 
 	def initialize
 		@score, @count = 0, 0
-		@actual_grid, @displayed_grid = Grid.new, Grid.new
+		@actual_grid = Grid.new
 		@ships = []
 		get_ships
 		enemy_place_ships
