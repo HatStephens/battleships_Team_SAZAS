@@ -24,7 +24,7 @@ class Player
 
 	def player_shoot (enemy, row, column)
 		enemy.actual_grid.received_shot(row, column)
-		enemy.actual_grid.print_grid
+		enemy.actual_grid.print_grid_displayed
 	end	
 
 	def get_ships

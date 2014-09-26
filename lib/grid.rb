@@ -46,6 +46,7 @@ class Grid
 
 	def miss(row, column)
 		@grid[row][column] = 'o'
+		@grid_displayed[row][col] = 'o'
 		# print_grid
 	end
 
