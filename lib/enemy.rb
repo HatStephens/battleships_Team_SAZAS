@@ -46,4 +46,11 @@ class Enemy
 		end
 		player.player_grid.print_grid
 	end
+
+
+	def received_shot(row, col)
+		result_shot = actual_grid.received_shot(row, col)
+		
+		displayed_grid[row][col] = result_shot
+	end
 end

@@ -1,6 +1,4 @@
 require 'game.rb'
-require 'ships.rb'
-
 
 describe Game do
 	let(:game){Game.new}
@@ -10,7 +8,7 @@ describe Game do
 	let(:ship_loop){double :ship_loop, :name => anything, :direction => anything}
 
 	it 'should have a InputManager' do
-		expect(game.input_manager).not_to be(nil)  
+		expect(game.input).not_to be(nil)  
 	end
 
 	it 'should greet you when the game is opened' do
@@ -28,10 +26,16 @@ describe Game do
 		expect(game.enemy.class).to eq(Enemy)	
 	end
 
-
 	it 'should create an array with each ship in it' do
 		expect{game.get_ships}.to change{game.ships.count}.by(5)
 	end
+
+	# it 'should return true if it hits 15' do
+
+	# end 
+
+
+
 
 	#it 'should loop ships and get their initial positions' do
 	#	game.get_ships
@@ -40,7 +44,5 @@ describe Game do
 	#	allow(ship_loop).to receive(:direction).with("h")
 	#	game.get_ships_locations
 	#end
-
-
 
 end

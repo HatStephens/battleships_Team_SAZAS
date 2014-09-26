@@ -1,5 +1,3 @@
-require_relative 'ships'
-
 class InputManager
 
 	def greeter
@@ -65,5 +63,13 @@ class InputManager
 
 	def ask_shot_col
 		puts "Please enter a column to shoot"
+	end
+
+	def print_lost_message
+		puts 'You lost. Better luck next time'
+	end
+
+	def print_win_message
+		puts 'Congratulations!!!!!!!!! You are a star!'
 	end
 end

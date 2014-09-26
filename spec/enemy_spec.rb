@@ -29,4 +29,9 @@ describe Enemy do
 		expect(player.player_grid.ship_square_count('~')).to eq(99)
 	end
 
+	it 'should receive a shot' do
+		expect(enemy.received_shot(2, 4)).to change{actual_grid[2][3]}
+	end
+
+
 end

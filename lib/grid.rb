@@ -8,6 +8,7 @@ class Grid
 	DEFAULT_GRID_SIZE = 10
 	DEFAULT_EMPTY = '~'
 	DEFAULT_FIRE = '*'
+	DEFAULT_MISS = 'o'
 
 	def initialize(option={})
 		@grid_size = option.fetch(:grid_size, DEFAULT_GRID_SIZE)
@@ -45,13 +46,13 @@ class Grid
 	end
 
 	def miss(row, column)
-		@grid[row][column] = 'o'
-		# print_grid
+		@grid[row][column] = DEFAULT_MISS
+		DEFAULT_MISS
 	end
 
 	def hit(row,column)
 		@grid[row][column] = DEFAULT_FIRE
-		# print_grid
+		DEFAULT_FIRE
 	end
 
 	def empty?(row, column)

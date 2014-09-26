@@ -25,20 +25,28 @@ class Game
     end
 
 	def create_oponents
-        @enemy = Enemy.new
+        enemy = Enemy.new
         create_player
 	end
 	
 	def shot
 		row  = input.get_shot_row
 		col = input.get_shot_col
-		results_of_a_shot(row, col)
+		puts "rew: #{row} and column : #{col}"
+		begin
+			enemy.received_shot(row, col)
+			puts "been in enemy.received_shot"
+			enemy.displayed_grid.print_grid
+		rescue Exception => e
+			shot
+		end
 	end
 
     def shot_randomlly
-		row  = random
-		col = random
-		results_of_a_shot(row, col)
+		row  = enemy.get_row_randomy
+		col = enemy.get_col_random
+
+		player.player_grid.received_shot(row, col)
 	end
 
 	def results_of_a_shot(row, col)
@@ -56,19 +64,19 @@ class Game
 		shot_randomlly
 		update_score
 		update_user_output
+		play_user if enemy.score < 15
+		input.print_lost_message 
 	end
 
 	def play_user
 		shot
 		update_score
 		update_user_output
+		play_enemy if player.score < 15
+		input.print_win_message
 	end
 
 	def turns
-		while player.score < 30 || enemy.score < 30 do
-			play_user
-			play_enemy
-		end
-		#call input_manager to say winner message
+		play_user
 	end
 end
